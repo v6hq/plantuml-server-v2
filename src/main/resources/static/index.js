@@ -6,18 +6,25 @@ function submit() {
 		method: 'POST',
 		body: model
 	})
-		.then((response) => response.body)
-		.then((data) => console.log(data));
+		.then((response) => response.json())
+		.then(function(data) {
+			console.log(data)
+			const url = new URL(window.location);
+			url.searchParams.set('model', data.modelEncoded);
+			window.history.pushState({}, '', url);
+			
+			var img = document.getElementById('output-image');
+			img.src='http://www.plantuml.com/plantuml/png/'+data.modelEncoded
+		});
 
-	//const url = new URL(window.location);
-	//url.searchParams.set('foo', modelInBas64);
-	//window.history.pushState({}, '', url);
 }
 function submitWithKeyboardShortcut(e) {
 	if (e.keyCode == 13 && e.metaKey) {
-		submit()
+		submit();
 	}
 }
 
 document.getElementById("input-textarea").addEventListener("keydown", submitWithKeyboardShortcut);
 document.getElementById("submit").addEventListener("click", submit);
+
+//http://www.plantuml.com/plantuml/png/SoWkIImgAStDuNBAJrBGjLDmpCbCJbMmKiX8pSd9vt98pKi1IW80
