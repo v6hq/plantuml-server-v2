@@ -1,0 +1,49 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	margin: 0;
+	font-family: Arial, Helvetica, sans-serif;
+	height: 100%;
+}
+
+.header {
+	display: flex;
+	justify-content: space-between;
+	padding: 8;
+	background-color: blue;
+}
+
+.header-title {
+	display: flex;
+	color: white
+}
+
+.header-actions {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.content {
+	display: flex;
+	flex-direction: row;
+	flex: 1 100%;
+}
+
+.input {
+	display: flex;
+	flex-direction: column;
+	flex-basis: 50%;
+}
+
+#input-textarea {
+	height: 100%;
+}
+
+.input-actions {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.output {
+	flex-basis: 50%;
+}
