@@ -14,7 +14,7 @@ function submit() {
 			window.history.pushState({}, '', url);
 			
 			var img = document.getElementById('output-image');
-			img.src='http://www.plantuml.com/plantuml/png/'+data.modelEncoded
+			img.src='image/?model='+data.modelEncoded
 		});
 
 }
