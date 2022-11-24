@@ -1,8 +1,7 @@
 
-# Missing core functions
+# Critical todos
 
-- Encode model (backend)
-- provide endpoints for image creation (backend)
+- Code is JUST running.. nothing else
 
 # Optional Improvements
 
