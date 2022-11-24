@@ -11,3 +11,4 @@
 - Switch Light/Dark function
 	- also image needs to consider selected mode
 - Add Autorefresh function
+- fix Package

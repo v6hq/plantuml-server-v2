@@ -29,42 +29,22 @@ public class PlantUmlController {
 	@PostMapping("/encode")
 	public String encode(@RequestBody String model) {
 		logger.info("encode");
-		
-		String modelEncoded="";
-		Transcoder transcoder = TranscoderUtil.getDefaultTranscoder();
-        try {
-        	modelEncoded = transcoder.encode(model);
-        } catch (IOException ioe) {
-        	//modelEncoded = "' unable to decode string";
-        }
-        try {
-        	modelEncoded = URLEncoder.encode(modelEncoded, "UTF-8");
-        } catch (UnsupportedEncodingException uee) {
-        	//model2 = "' invalid encoded string";
-        }
-        
-		
-		return "{ \"modelEncoded\": \""+modelEncoded+"\" }";
+		return encodeModel(model);
+	}
+
+	@PostMapping("/decode")
+	public String decode(@RequestBody String model) {
+		logger.info("decode");
+		return decodeModel(model);
 	}
 
 	@GetMapping("/image")
 	public ResponseEntity<byte[]> image(@RequestParam String model) throws IOException {
-		logger.info("image "+model);
-		
-        String model2;
-        try {
-        	model2 = URLDecoder.decode(model, "UTF-8");
-        } catch (UnsupportedEncodingException uee) {
-        	model2 = "' invalid encoded string";
-        }
-        Transcoder transcoder = TranscoderUtil.getDefaultTranscoder();
-        try {
-        	model2 = transcoder.decode(model2);
-        } catch (IOException ioe) {
-        	model2 = "' unable to decode string";
-        }
+		logger.info("image " + model);
 
-		SourceStringReader reader = new SourceStringReader(model2);
+		var decoded = decodeModel(model);
+
+		SourceStringReader reader = new SourceStringReader(decoded);
 		byte[] imageBytes;
 		try (ByteArrayOutputStream outstream = new ByteArrayOutputStream()) {
 			reader.generateImage(outstream);
@@ -76,6 +56,38 @@ public class PlantUmlController {
 		var response = new ResponseEntity<byte[]>(imageBytes, headers, HttpStatus.OK);
 
 		return response;
+	}
+
+	private String decodeModel(String encoded) {
+		String decoded;
+		try {
+			decoded = URLDecoder.decode(encoded, "UTF-8");
+		} catch (UnsupportedEncodingException uee) {
+			decoded = "' invalid encoded string";
+		}
+		Transcoder transcoder = TranscoderUtil.getDefaultTranscoder();
+		try {
+			decoded = transcoder.decode(decoded);
+		} catch (IOException ioe) {
+			decoded = "' unable to decode string";
+		}
+		return decoded;
+	}
+
+	private String encodeModel(String plain) {
+		String modelEncoded = "";
+		Transcoder transcoder = TranscoderUtil.getDefaultTranscoder();
+		try {
+			modelEncoded = transcoder.encode(plain);
+		} catch (IOException ioe) {
+			// modelEncoded = "' unable to decode string";
+		}
+		try {
+			modelEncoded = URLEncoder.encode(modelEncoded, "UTF-8");
+		} catch (UnsupportedEncodingException uee) {
+			// model2 = "' invalid encoded string";
+		}
+		return modelEncoded;
 	}
 
 }
