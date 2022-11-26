@@ -39,15 +39,15 @@ public class PlantUmlController {
 	}
 
 	@GetMapping("/image")
-	public ResponseEntity<byte[]> image(@RequestParam String model) throws IOException {
-		logger.info("image " + model);
+	public ResponseEntity<byte[]> image(@RequestParam("model") String encodedModel) throws IOException {
+		logger.info("image " + encodedModel);
 
-		var decoded = decodeModel(model);
+		var decoded = decodeModel(encodedModel);
 
 		SourceStringReader reader = new SourceStringReader(decoded);
 		byte[] imageBytes;
 		try (ByteArrayOutputStream outstream = new ByteArrayOutputStream()) {
-			reader.generateImage(outstream);
+			reader.outputImage(outstream);
 			imageBytes = outstream.toByteArray();
 		}
 		var headers = new HttpHeaders();
