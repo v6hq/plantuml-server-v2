@@ -42,7 +42,7 @@ jobs:
           # relative path to the place where source code with Dockerfile is located
           context: ./
           push: true
-          tags: k7aus/plantuml-springserver:latest
+          tags: v6hq/plantuml-server-v2:latest
 
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
