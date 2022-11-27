@@ -1,4 +1,4 @@
-![Build](https://github.com/kDot/plantuml-springserver/actions/workflows/maven.yml/badge.svg)
+[![CI Build](https://github.com/v6hq/plantuml-server-v2/actions/workflows/maven.yml/badge.svg)](https://github.com/v6hq/plantuml-server-v2/actions/workflows/maven.yml)
 
 # PlantUML Server v2 
 
