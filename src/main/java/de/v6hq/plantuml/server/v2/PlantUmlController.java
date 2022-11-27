@@ -1,4 +1,4 @@
-package com.example.plantumlspringerver;
+package de.v6hq.plantuml.server.v2;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
