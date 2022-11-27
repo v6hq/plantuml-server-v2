@@ -1,4 +1,4 @@
-package com.example.plantumlspringerver;
+package de.v6hq.plantuml.server.v2;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
