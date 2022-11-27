@@ -9,8 +9,6 @@ import javax.imageio.ImageIO;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import de.v6hq.plantuml.server.v2.PlantUmlController;
-
 public class PlantUmlControllerTest {
 
 	private PlantUmlController target = new PlantUmlController();
