@@ -36,7 +36,7 @@ body {
 .input {
 	display: flex;
 	flex-direction: column;
-	flex-basis: 50%;
+	flex-basis: 33%;
 }
 
 #input-textarea {
@@ -50,7 +50,7 @@ body {
 }
 
 .output {
-	flex-basis: 50%;
+	flex-basis: 66%;
 	/* following configs are for being a flex container itself */
 	display: flex;
 	align-items: center;
