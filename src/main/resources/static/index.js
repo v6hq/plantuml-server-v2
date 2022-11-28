@@ -44,7 +44,7 @@ function encodeModel(modelPlain) {
 			body: modelPlain
 		})
 			.then((response) => response.text())
-			.then(function (data) {
+			.then(function(data) {
 				var m = new Model()
 				m.encoded = data
 				m.plain = modelPlain
@@ -62,7 +62,7 @@ function decodeModel(modelEncoded) {
 			body: modelEncoded
 		})
 			.then((response) => response.text())
-			.then(function (data) {
+			.then(function(data) {
 				console.log('gg ' + data);
 				var m = new Model()
 				m.encoded = modelEncoded
@@ -94,7 +94,27 @@ function updateWithNewModel(model) {
 
 }
 
+function switchLayout() {
+	currentLayoutVariant++;
+	if (currentLayoutVariant >= layoutVariants.length) {
+		currentLayoutVariant = 0;
+	}
+	var variant = layoutVariants[currentLayoutVariant];
+	document.getElementById("content").style.flexDirection = variant[0];
+	document.getElementById("input").style.flexBasis = variant[1];
+	document.getElementById("output").style.flexBasis = variant[2];
 
+}
+
+var layoutVariants = [
+["row", '33%', '66%'],
+["row", '50%', '50%'],
+["column", '33%', '66%'],
+["column", '50%', '50%']]
+
+var currentLayoutVariant = 0;
+
+document.getElementById("switchLayout").addEventListener("click", switchLayout);
 document.getElementById("input-textarea").addEventListener("keydown", submitWithKeyboardShortcut);
 document.getElementById("submit").addEventListener("click", submit);
 
