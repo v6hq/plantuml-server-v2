@@ -13,12 +13,17 @@ function submit() {
 }
 
 function submitWithKeyboardShortcut(e) {
-	if (e.keyCode == 13 && e.metaKey) {
+	if (e.keyCode == 13 && e.ctrlKey) {
 		submit();
 	}
 }
 
 function init() {
+
+	document.getElementById("switchLayout").addEventListener("click", switchLayout);
+	document.getElementById("input-textarea").addEventListener("keydown", submitWithKeyboardShortcut);
+	document.getElementById("submit").addEventListener("click", submit);
+
 	try {
 		var url_string = (window.location.href);
 		var url = new URL(url_string);
@@ -44,7 +49,7 @@ function encodeModel(modelPlain) {
 			body: modelPlain
 		})
 			.then((response) => response.text())
-			.then(function(data) {
+			.then(function (data) {
 				var m = new Model()
 				m.encoded = data
 				m.plain = modelPlain
@@ -62,7 +67,7 @@ function decodeModel(modelEncoded) {
 			body: modelEncoded
 		})
 			.then((response) => response.text())
-			.then(function(data) {
+			.then(function (data) {
 				console.log('gg ' + data);
 				var m = new Model()
 				m.encoded = modelEncoded
@@ -107,15 +112,11 @@ function switchLayout() {
 }
 
 var layoutVariants = [
-["row", '33%', '66%'],
-["row", '50%', '50%'],
-["column", '33%', '66%'],
-["column", '50%', '50%']]
+	["row", '33%', '66%'],
+	["row", '50%', '50%'],
+	["column", '33%', '66%'],
+	["column", '50%', '50%']]
 
 var currentLayoutVariant = 0;
-
-document.getElementById("switchLayout").addEventListener("click", switchLayout);
-document.getElementById("input-textarea").addEventListener("keydown", submitWithKeyboardShortcut);
-document.getElementById("submit").addEventListener("click", submit);
 
 window.onload = init;
