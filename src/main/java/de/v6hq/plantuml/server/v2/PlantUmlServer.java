@@ -28,7 +28,7 @@ public class PlantUmlServer {
 	}
 	
 	public void run() {
-		app.start(7070);
+		app.start(8080);
 	}
 
 }
