@@ -2,7 +2,7 @@
 
 # PlantUML Server v2 
 
-A plantuml server with Spring as server backend. It contains also a slightly improved frontend with some vanilla js.
+A plantuml server with ~~spring ~~ a no magic server backend. It contains also a slightly improved frontend with some vanilla js.
 
 ## Build
 

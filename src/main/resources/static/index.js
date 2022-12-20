@@ -25,17 +25,27 @@ function init() {
 	document.getElementById("submit").addEventListener("click", submit);
 
 	try {
-		var url_string = (window.location.href);
-		var url = new URL(url_string);
-		var modelEncoded = url.searchParams.get("input");
-		if (modelEncoded != undefined) {
-			console.log(modelEncoded)
-			decodeModel(modelEncoded).then(model => {
-				console.log(model);
-				updateWithNewModel(model
-				);
-			})
+		var pathSegments = window.location.pathname.split('/');
+		var indexOfInputSegment = pathSegments.indexOf('input')
+		var modelEncoded = pathSegments[indexOfInputSegment + 1];
+		/* backward compatiblity: there was a time when input was a query param */
+		if (modelEncoded== undefined || modelEncoded === "") {
+			const searchParams = new URLSearchParams(window.location.search);
+			modelEncoded = searchParams.get("input");
 		}
+		/* end backward compatiblity */
+		
+		if (modelEncoded == undefined || modelEncoded === "") {
+			submit(); // fallback using hard coded example in html
+			return;
+		}
+
+		// update components with provided model
+		console.log(modelEncoded)
+		decodeModel(modelEncoded).then(model => {
+			console.log(model);
+			updateWithNewModel(model);
+		})
 	} catch (err) {
 		//console.log("Issues with Parsing URL Parameter's - " + err);
 	}
@@ -44,14 +54,14 @@ function init() {
 
 function encodeModel(modelPlain) {
 	function exec(resolutionFunc, rejectionFunc) {
-		fetch('encode', {
+		fetch('/encode', {
 			method: 'POST',
 			body: modelPlain
 		})
 			.then((response) => response.text())
-			.then(function (data) {
+			.then(function(modelEncoded) {
 				var m = new Model()
-				m.encoded = data
+				m.encoded = modelEncoded
 				m.plain = modelPlain
 				resolutionFunc(m)
 			});
@@ -62,12 +72,12 @@ function encodeModel(modelPlain) {
 
 function decodeModel(modelEncoded) {
 	function exec(resolutionFunc, rejectionFunc) {
-		fetch('decode', {
+		fetch('/decode', {
 			method: 'POST',
 			body: modelEncoded
 		})
 			.then((response) => response.text())
-			.then(function (data) {
+			.then(function(data) {
 				console.log('gg ' + data);
 				var m = new Model()
 				m.encoded = modelEncoded
@@ -83,19 +93,32 @@ function updateWithNewModel(model) {
 	if (model.encoded == undefined || model.plain == undefined) {
 		return;
 	}
-	console.log("updatePage with " + model)
+	console.log("updatePage")
 
 	/* update content in textfeld */
 	document.getElementById("input-textarea").value = model.plain;
 
 	/* update url */
-	const url = new URL(window.location);
-	url.searchParams.set('input', model.encoded);
+	var url = new URL(window.location);
+	var urlAsString = (window.location.href);
+	var urlSegments = urlAsString.split('/');
+	var indexOfInputSegment = urlSegments.lastIndexOf('input')
+	if (indexOfInputSegment == -1) {
+		url = new URL('/input/' + model.encoded, url);
+	}
+	else {
+		if (urlSegments[indexOfInputSegment + 1] == undefined) {
+			url = new URL(url, model.encoded);
+		}
+		else {
+			url = new URL(urlAsString.replace(urlSegments[indexOfInputSegment + 1], model.encoded));
+		}
+	}
 	window.history.pushState({}, '', url);
 
 	/* update image link */
 	var img = document.getElementById('output-image');
-	img.src = 'image/?input=' + model.encoded
+	img.src = window.location.origin + '/image/' + model.encoded
 
 }
 
