@@ -135,10 +135,8 @@ function switchLayout() {
 }
 
 var layoutVariants = [
-	["row", '33%', '66%'],
-	["row", '50%', '50%'],
-	["column", '33%', '66%'],
-	["column", '50%', '50%']]
+	["row"],
+	["column"]]
 
 var currentLayoutVariant = 0;
 

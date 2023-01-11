@@ -125,6 +125,14 @@
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>3.0.0-M7</version>
 			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>3.1.0</version>
+				<configuration>
+					<mainClass>de.v6hq.plantuml.server.v2.PlantUmlServerRunner</mainClass>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 </project>

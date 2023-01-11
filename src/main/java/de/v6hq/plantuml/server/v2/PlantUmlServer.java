@@ -25,6 +25,10 @@ public class PlantUmlServer {
 			ctx.result(plantUmlController.image(ctx.pathParam("input")));
 			ctx.contentType("image/png");
 		});
+		app.get("png/{input}", ctx -> {
+			ctx.result(plantUmlController.image(ctx.pathParam("input")));
+			ctx.contentType("image/png");
+		});
 	}
 	
 	public void run() {
