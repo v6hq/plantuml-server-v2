@@ -28,12 +28,12 @@ function init() {
 		var pathSegments = window.location.pathname.split('/');
 		var indexOfInputSegment = pathSegments.indexOf('input')
 		var modelEncoded = pathSegments[indexOfInputSegment + 1];
-		/* backward compatiblity: there was a time when input was a query param */
+		/* backward compatibility: there was a time when input was a query param */
 		if (modelEncoded== undefined || modelEncoded === "") {
 			const searchParams = new URLSearchParams(window.location.search);
 			modelEncoded = searchParams.get("input");
 		}
-		/* end backward compatiblity */
+		/* end backward compatibility */
 		
 		if (modelEncoded == undefined || modelEncoded === "") {
 			submit(); // fallback using hard coded example in html
@@ -95,7 +95,7 @@ function updateWithNewModel(model) {
 	}
 	console.log("updatePage")
 
-	/* update content in textfeld */
+	/* update content in text field */
 	document.getElementById("input-textarea").value = model.plain;
 
 	/* update url */
