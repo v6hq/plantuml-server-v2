@@ -50,7 +50,7 @@ body {
 }
 
 .output {
-	flex-basis: 60%;
+	flex-basis: 67%;
 	/* following configs are for being a flex container itself */
 	display: flex;
 	align-items: center;

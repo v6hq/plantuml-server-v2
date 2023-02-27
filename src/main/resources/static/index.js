@@ -129,9 +129,20 @@ function switchLayout() {
 	}
 	var variant = layoutVariants[currentLayoutVariant];
 	document.getElementById("content").style.flexDirection = variant[0];
-	document.getElementById("input").style.flexBasis = variant[1];
-	document.getElementById("output").style.flexBasis = variant[2];
-
+	//next lines needed to remove a width/height set by scaling textarea
+	document.getElementById("input-textarea").style.removeProperty("width");
+	document.getElementById("input-textarea").style.removeProperty("height");
+	//next lines to scale image to fit to screen
+	document.getElementById("output-image").style.removeProperty("max-width");
+    document.getElementById("output-image").style.removeProperty("max-height");
+    if (variant[0]==="row") {
+        document.getElementById("output-image").style.maxWidth="100%"
+    }
+    if (variant[0]==="column") {
+        const cssObj = window.getComputedStyle( document.getElementById("output"), null);
+        const percentage = parseInt(cssObj.getPropertyValue("flex-basis"),10);
+        document.getElementById("output-image").style.maxHeight=percentage+"vh"
+    }
 }
 
 var layoutVariants = [
