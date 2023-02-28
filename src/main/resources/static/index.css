@@ -26,14 +26,14 @@ body {
 	justify-content: flex-end;
 }
 
-.content {
+#content {
 	display: flex;
 	flex-direction: row;
 	flex: 1 100%;
 	margin: 8;
 }
 
-.input {
+#input {
 	display: flex;
 	flex-direction: column;
 	flex-basis: 33%;
@@ -49,10 +49,24 @@ body {
 	padding-top: 8;
 }
 
-.output {
+#output {
 	flex-basis: 67%;
 	/* following configs are for being a flex container itself */
 	display: flex;
 	align-items: center;
 	flex-direction: column;
+	justify-content: space-between;
+}
+
+#output-image {
+	max-width: 100%;
+}
+
+#svg-href {
+	align-self: flex-end;
+}
+
+a {
+	color: black;
+	font-size: x-small;
 }

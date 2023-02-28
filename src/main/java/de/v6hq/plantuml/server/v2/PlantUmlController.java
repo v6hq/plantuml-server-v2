@@ -9,6 +9,8 @@ import java.net.URLEncoder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import net.sourceforge.plantuml.FileFormat;
+import net.sourceforge.plantuml.FileFormatOption;
 import net.sourceforge.plantuml.SourceStringReader;
 import net.sourceforge.plantuml.code.Transcoder;
 import net.sourceforge.plantuml.code.TranscoderUtil;
@@ -18,18 +20,7 @@ public class PlantUmlController {
 	Logger logger = LoggerFactory.getLogger(PlantUmlController.class);
 
 	public byte[] image(String encodedModel) throws IOException {
-		logger.info("image " + encodedModel);
-
-		var decoded = decode(encodedModel);
-
-		SourceStringReader reader = new SourceStringReader(decoded);
-		byte[] imageBytes;
-		try (ByteArrayOutputStream outstream = new ByteArrayOutputStream()) {
-			reader.outputImage(outstream);
-			imageBytes = outstream.toByteArray();
-		}
-
-		return imageBytes;
+		return genericOutput(encodedModel, FileFormat.PNG);
 	}
 
 	public String decode(String encoded) {
@@ -67,6 +58,27 @@ public class PlantUmlController {
 			// model2 = "' invalid encoded string";
 		}
 		return modelEncoded;
+	}
+
+	public byte[] svg(String encodedModel) {
+		return genericOutput(encodedModel, FileFormat.SVG);
+	}
+
+	private byte[] genericOutput(String encodedModel, FileFormat format) {
+		logger.info("image " + encodedModel);
+
+		var decoded = decode(encodedModel);
+
+		SourceStringReader reader = new SourceStringReader(decoded);
+		byte[] imageBytes = null;
+		try (ByteArrayOutputStream outstream = new ByteArrayOutputStream()) {
+			reader.outputImage(outstream, new FileFormatOption(format));
+			imageBytes = outstream.toByteArray();
+		} catch (IOException e) {
+			logger.error("Can not create output.", e);
+		}
+
+		return imageBytes;
 	}
 
 }
