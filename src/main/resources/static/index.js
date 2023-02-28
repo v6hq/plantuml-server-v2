@@ -120,6 +120,11 @@ function updateWithNewModel(model) {
 	var img = document.getElementById('output-image');
 	img.src = window.location.origin + '/image/' + model.encoded
 
+	/* update svg link */
+	var svgLink = document.getElementById('svg-href');
+	svgLink.href=window.location.origin + '/svg/' + model.encoded
+
+
 }
 
 function switchLayout() {
