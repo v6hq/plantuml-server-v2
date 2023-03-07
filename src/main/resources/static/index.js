@@ -118,13 +118,15 @@ function updateWithNewModel(model) {
 
 	/* update image link */
 	var img = document.getElementById('output-image');
-	img.src = window.location.origin + '/image/' + model.encoded
+	img.src = window.location.origin + '/svg/' + model.encoded
 
 	/* update svg link */
 	var svgLink = document.getElementById('svg-href');
 	svgLink.href=window.location.origin + '/svg/' + model.encoded
 
-
+	/* update png link */
+	var svgLink = document.getElementById('png-href');
+	svgLink.href=window.location.origin + '/png/' + model.encoded
 }
 
 function switchLayout() {

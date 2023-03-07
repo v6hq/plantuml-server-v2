@@ -24,6 +24,7 @@ body {
 .header-actions {
 	display: flex;
 	justify-content: flex-end;
+	gap: 10px;
 }
 
 #content {
@@ -62,11 +63,16 @@ body {
 	max-width: 100%;
 }
 
-#svg-href {
+#output-variants {
 	align-self: flex-end;
+	display: flex;
+	align-items: end;
+	flex-direction: row;
+	gap: 10px;
+	margin-bottom: 10;
 }
 
 a {
 	color: black;
-	font-size: x-small;
+	font-size: small;
 }
