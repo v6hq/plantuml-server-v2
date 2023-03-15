@@ -63,7 +63,7 @@ public class PlantUmlServerTest {
 		JavalinTest.test(testtarget, (server, client) -> {
 
 			var encResponse = client.post("/encode", plain);
-			var imgResponse = client.get("/image/" + encResponse.body().string());
+			var imgResponse = client.get("/png/" + encResponse.body().string());
 			BufferedImage img = ImageIO.read(new ByteArrayInputStream(imgResponse.body().bytes()));
 			Assertions.assertTrue(img.getHeight() > 30, "Any error image seems to be returned.");
 		});
