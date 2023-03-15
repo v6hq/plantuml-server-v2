@@ -19,10 +19,6 @@ public class PlantUmlController {
 
 	Logger logger = LoggerFactory.getLogger(PlantUmlController.class);
 
-	public byte[] image(String encodedModel) throws IOException {
-		return genericOutput(encodedModel, FileFormat.PNG);
-	}
-
 	public String decode(String encoded) {
 
 		if (encoded == null || encoded.isBlank()) {
@@ -62,6 +58,10 @@ public class PlantUmlController {
 
 	public byte[] svg(String encodedModel) {
 		return genericOutput(encodedModel, FileFormat.SVG);
+	}
+
+	public byte[] png(String encodedModel) throws IOException {
+		return genericOutput(encodedModel, FileFormat.PNG);
 	}
 
 	private byte[] genericOutput(String encodedModel, FileFormat format) {
