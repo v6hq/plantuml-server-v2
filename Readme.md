@@ -1,5 +1,5 @@
 [![CI Build](https://github.com/v6hq/plantuml-server-v2/actions/workflows/ci.yml/badge.svg)]
-(https://github.com/v6hq/plantuml-server-v2/actions/workflows/ci.yml)
+
 
 > This repo is archived. Look for [kroki](https://kroki.io) instead.
 
