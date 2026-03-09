@@ -2,8 +2,8 @@ package de.v6hq.plantuml.server.v2;
 
 import io.javalin.Javalin;
 import io.micrometer.core.instrument.Counter;
-import io.micrometer.prometheus.PrometheusConfig;
-import io.micrometer.prometheus.PrometheusMeterRegistry;
+import io.micrometer.prometheusmetrics.PrometheusConfig;
+import io.micrometer.prometheusmetrics.PrometheusMeterRegistry;
 
 public class MetricsController {
 
