@@ -1,6 +1,8 @@
 [![CI Build](https://github.com/v6hq/plantuml-server-v2/actions/workflows/ci.yml/badge.svg)]
 (https://github.com/v6hq/plantuml-server-v2/actions/workflows/ci.yml)
 
+> This repo is archived. Look for [kroki](https://kroki.io) instead.
+
 # PlantUML Server v2 
 
 A plantuml server with ~~spring~~ a no magic server backend. It contains also a slightly improved frontend with some vanilla js.
