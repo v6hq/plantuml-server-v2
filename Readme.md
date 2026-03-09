@@ -1,4 +1,5 @@
-[![CI Build](https://github.com/v6hq/plantuml-server-v2/actions/workflows/ci.yml/badge.svg)](https://github.com/v6hq/plantuml-server-v2/actions/workflows/ci.yml)
+[![CI Build](https://github.com/v6hq/plantuml-server-v2/actions/workflows/ci.yml/badge.svg)]
+(https://github.com/v6hq/plantuml-server-v2/actions/workflows/ci.yml)
 
 # PlantUML Server v2 
 

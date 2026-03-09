@@ -21,25 +21,24 @@ public class PlantUmlServer {
 			config.requestLogger.http(new RequestLogger());
 			config.staticFiles.add("static");
 			config.spaRoot.addFile("/", "static/index.html");
+			config.routes.post("encode", ctx -> {
+				ctx.result(plantUmlController.encode(ctx.body()));
+			});
+			config.routes.post("decode", ctx -> {
+				ctx.result(plantUmlController.decode(ctx.body()));
+			});
+			config.routes.get("image/{input}", ctx -> {
+				if (DEFAULT_IMAGEFORMAT.equalsIgnoreCase("svg")) {
+					this.generateSvg(ctx);
+				} else {
+					this.generatePng(ctx);
+				}
+			});
+			config.routes.get("png/{input}", this::generatePng);
+			config.routes.get("svg/{input}", this::generateSvg);
 		});
 		
-		new MetricsController(app).init();
-
-		app.post("encode", ctx -> {
-			ctx.result(plantUmlController.encode(ctx.body()));
-		});
-		app.post("decode", ctx -> {
-			ctx.result(plantUmlController.decode(ctx.body()));
-		});
-		app.get("image/{input}", ctx -> {
-			if (DEFAULT_IMAGEFORMAT.equalsIgnoreCase("svg")) {
-				this.generateSvg(ctx);
-			} else {
-				this.generatePng(ctx);
-			}
-		});
-		app.get("png/{input}", this::generatePng);
-		app.get("svg/{input}", this::generateSvg);
+		//new MetricsController(app).init();
 	}
 
 	private void generatePng(Context ctx) throws IOException {
